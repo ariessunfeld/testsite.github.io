@@ -1,5 +1,13 @@
 const { useState } = React;
-const { HashRouter, Routes, Route, Link, useLocation } = ReactRouterDOM;
+
+// Check if React Router is loaded
+if (typeof window.ReactRouterDOM === 'undefined') {
+  console.error('React Router DOM not loaded! Check your CDN script.');
+  document.getElementById('root').innerHTML = '<div style="padding: 20px; color: red;">Error: React Router not loaded. Please check your internet connection and refresh.</div>';
+  throw new Error('ReactRouterDOM is undefined');
+}
+
+const { HashRouter, Routes, Route, Link, useLocation } = window.ReactRouterDOM;
 
 // Obfuscated email component
 const ObfuscatedEmail = () => {
@@ -8,7 +16,7 @@ const ObfuscatedEmail = () => {
   const revealEmail = () => {
     setRevealed(true);
     // Construct email to avoid scraping
-    const user = 'henrik.essunger';
+    const user = 'ariessunfeld';
     const domain = 'gmail.com';
     const email = `${user}@${domain}`;
     
@@ -21,7 +29,7 @@ const ObfuscatedEmail = () => {
   if (revealed) {
     return (
       <span className="font-mono text-blue-600">
-        henrik.essunger@gmail.com
+        ariessunfeld@gmail.com
       </span>
     );
   }
